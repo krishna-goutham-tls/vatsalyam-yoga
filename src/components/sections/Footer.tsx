@@ -6,17 +6,25 @@ export function Footer() {
   return (
     <>
       <footer
-        className="relative bg-deep-forest px-5 sm:px-8 lg:px-12 py-6 sm:py-8"
+        className="relative bg-charcoal px-5 sm:px-8 lg:px-12 py-6 sm:py-8"
         aria-label="Footer"
       >
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-2">
             <Image
-              src="/logo.png"
-              alt="Vatsalyam Yoga logo"
-              width={120}
-              height={40}
-              className="h-6 sm:h-7 w-auto object-contain brightness-150"
+              src="/logo-icon.png"
+              alt="Vatsalyam Yoga icon"
+              width={40}
+              height={32}
+              className="h-7 sm:h-8 lg:h-9 w-auto object-contain flex-none brightness-150"
+              loading="lazy"
+            />
+            <Image
+              src="/logo-name.png"
+              alt="Vatsalyam Yoga"
+              width={130}
+              height={32}
+              className="h-7 sm:h-8 lg:h-9 w-auto object-contain flex-none translate-y-[2px] brightness-150"
               loading="lazy"
             />
           </div>
