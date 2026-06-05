@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { FadeIn, StaggerContainer, StaggerItem } from "../animations/FadeIn";
+import { scrollToSection } from "@/lib/scroll";
 
 const workshops = [
   {
@@ -48,6 +49,7 @@ function WorkshopCard({ ws }: { ws: typeof workshops[0] }) {
           </p>
           <a
             href="#contact"
+            onClick={(e) => { e.preventDefault(); scrollToSection("contact"); }}
             className="inline-flex items-center justify-center px-3 py-1.5 sm:px-4 sm:py-2 border border-deep-forest/30 text-deep-forest font-body text-[10px] sm:text-xs font-medium tracking-wide rounded-sm hover:bg-deep-forest hover:text-parchment transition-colors duration-300 self-start"
           >
             Book Now

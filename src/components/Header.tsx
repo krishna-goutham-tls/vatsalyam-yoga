@@ -1,15 +1,16 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { scrollToSection } from "@/lib/scroll";
 
 const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Classes", href: "#classes" },
-  { label: "Stories", href: "#stories" },
-  { label: "Founder", href: "#founder" },
-  { label: "Contact", href: "#contact" },
+  { label: "About", id: "about" },
+  { label: "Classes", id: "classes" },
+  { label: "Stories", id: "stories" },
+  { label: "Founder", id: "founder" },
+  { label: "Contact", id: "contact" },
 ];
 
 export function Header() {
@@ -24,13 +25,10 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleNavClick = (href: string) => {
+  const handleNavClick = useCallback((id: string) => {
     setIsOpen(false);
-    const el = document.querySelector(href);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+    scrollToSection(id);
+  }, []);
 
   return (
     <header
@@ -47,7 +45,7 @@ export function Header() {
             href="#hero"
             onClick={(e) => {
               e.preventDefault();
-              handleNavClick("#hero");
+              handleNavClick("hero");
             }}
             className="relative flex items-center gap-1.5 sm:gap-2"
             aria-label="Vatsalyam Yoga — Home"
@@ -74,11 +72,11 @@ export function Header() {
           <nav className="hidden lg:flex items-center gap-8" aria-label="Main navigation">
             {navLinks.map((link) => (
               <a
-                key={link.href}
-                href={link.href}
+                key={link.id}
+                href={`#${link.id}`}
                 onClick={(e) => {
                   e.preventDefault();
-                  handleNavClick(link.href);
+                  handleNavClick(link.id);
                 }}
                 className="font-body text-[13px] tracking-[0.08em] uppercase text-charcoal/80 hover:text-terracotta transition-colors duration-300 relative group"
               >
@@ -129,14 +127,14 @@ export function Header() {
             <nav className="flex flex-col px-5 sm:px-8 py-6 gap-1" aria-label="Mobile navigation">
               {navLinks.map((link, index) => (
                 <motion.a
-                  key={link.href}
-                  href={link.href}
+                  key={link.id}
+                  href={`#${link.id}`}
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.05, duration: 0.3 }}
                   onClick={(e) => {
                     e.preventDefault();
-                    handleNavClick(link.href);
+                    handleNavClick(link.id);
                   }}
                   className="font-body text-sm tracking-[0.08em] uppercase text-charcoal/80 hover:text-terracotta transition-colors duration-200 py-3 border-b border-gold/5"
                 >
