@@ -6,7 +6,6 @@ import { Stories } from "@/components/sections/Stories";
 import { VideoTestimonials } from "@/components/sections/VideoTestimonials";
 import { Founder } from "@/components/sections/Founder";
 import { Contact } from "@/components/sections/Contact";
-import { Workshops } from "@/components/sections/Workshops";
 import { Footer } from "@/components/sections/Footer";
 
 export default function Home() {
@@ -62,7 +61,6 @@ export default function Home() {
       <VideoTestimonials />
       <Founder />
       <Contact />
-      <Workshops />
       <Footer />
     </main>
   );

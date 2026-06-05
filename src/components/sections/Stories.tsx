@@ -9,8 +9,8 @@ const testimonials = [
     location: "Chennai",
     quote:
       "I was skeptical about online yoga, but Raji is incredibly observant and attentive. Yoga has helped me manage aches and pains while improving fitness and awareness.",
-    rotation: "rotate-1",
-    yOffset: "-translate-y-1",
+    rotateDeg: 1,
+    yOffsetPx: -4,
     featured: true,
   },
   {
@@ -18,8 +18,8 @@ const testimonials = [
     location: "USA",
     quote:
       "Raji tailored the session to my personal goals. She observed, corrected my posture, offered suggestions, and consistently followed up.",
-    rotation: "-rotate-1",
-    yOffset: "translate-y-2",
+    rotateDeg: -1,
+    yOffsetPx: 8,
     featured: true,
   },
   {
@@ -27,8 +27,8 @@ const testimonials = [
     location: "",
     quote:
       "My mother and mother-in-law have transformed physically and mentally. Raji's kindness, patience, and personal connection created a safe and uplifting environment.",
-    rotation: "rotate-2",
-    yOffset: "-translate-y-2",
+    rotateDeg: 2,
+    yOffsetPx: -8,
     featured: true,
   },
   {
@@ -36,8 +36,8 @@ const testimonials = [
     location: "Australia",
     quote:
       "Despite the virtual format, her teaching is exceptionally focused. She observes, corrects, and aligns poses accurately even through the screen.",
-    rotation: "-rotate-2",
-    yOffset: "translate-y-1",
+    rotateDeg: -2,
+    yOffsetPx: 4,
     featured: false,
   },
   {
@@ -45,8 +45,8 @@ const testimonials = [
     location: "",
     quote:
       "Raji understood the knee problems for each one of us and gave precise exercises. That helped me greatly.",
-    rotation: "rotate-1",
-    yOffset: "-translate-y-1",
+    rotateDeg: 1,
+    yOffsetPx: -4,
     featured: false,
   },
   {
@@ -54,8 +54,8 @@ const testimonials = [
     location: "UK",
     quote:
       "I started with no background in yoga. My stamina and flexibility improved so much through her patient and supportive teaching.",
-    rotation: "-rotate-1",
-    yOffset: "translate-y-2",
+    rotateDeg: -1,
+    yOffsetPx: 8,
     featured: false,
   },
 ];
@@ -69,18 +69,23 @@ function TestimonialCard({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30, rotate: 0 }}
-      whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+      initial={{ opacity: 0, y: t.yOffsetPx + 30, rotate: t.rotateDeg }}
+      whileInView={{ opacity: 1, y: t.yOffsetPx, rotate: t.rotateDeg }}
+      whileHover={{
+        rotate: 0,
+        y: t.yOffsetPx - 4,
+        transition: { duration: 0.3, ease: [0.25, 0.1, 0.25, 1] },
+      }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{
         duration: 0.6,
         delay: index * 0.1 + 0.15,
         ease: [0.25, 0.1, 0.25, 1],
       }}
-      className={`group ${t.rotation} ${t.yOffset} transition-all duration-400 hover:rotate-0 hover:-translate-y-1 hover:shadow-lg`}
+      className="group"
     >
       <div
-        className={`bg-linen rounded-sm border border-gold/10 hover:border-gold/25 shadow-sm transition-all duration-300 h-full flex flex-col ${
+        className={`bg-linen rounded-sm border border-gold/10 hover:border-gold/25 shadow-sm hover:shadow-lg transition-shadow duration-300 h-full flex flex-col ${
           t.featured ? "p-4 sm:p-5 lg:p-6" : "p-3 sm:p-4 lg:p-5"
         }`}
       >
