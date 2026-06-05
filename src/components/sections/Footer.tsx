@@ -6,7 +6,7 @@ export function Footer() {
   return (
     <>
       <footer
-        className="relative bg-charcoal px-5 sm:px-8 lg:px-12 py-6 sm:py-8"
+        className="relative bg-parchment px-5 sm:px-8 lg:px-12 py-6 sm:py-8"
         aria-label="Footer"
       >
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
@@ -16,7 +16,7 @@ export function Footer() {
               alt="Vatsalyam Yoga icon"
               width={40}
               height={32}
-              className="h-7 sm:h-8 lg:h-9 w-auto object-contain flex-none brightness-150"
+              className="h-7 sm:h-8 lg:h-9 w-auto object-contain flex-none"
               loading="lazy"
             />
             <Image
@@ -24,11 +24,11 @@ export function Footer() {
               alt="Vatsalyam Yoga"
               width={130}
               height={32}
-              className="h-7 sm:h-8 lg:h-9 w-auto object-contain flex-none translate-y-[2px] brightness-150"
+              className="h-7 sm:h-8 lg:h-9 w-auto object-contain flex-none translate-y-[2px]"
               loading="lazy"
             />
           </div>
-          <p className="font-body text-[11px] sm:text-xs text-parchment/60 text-center sm:text-right">
+          <p className="font-body text-[11px] sm:text-xs text-charcoal/60 text-center sm:text-right">
             &copy; Rajeswari Sitaraman &middot; Founder, Vatsalyam Yoga
           </p>
         </div>
