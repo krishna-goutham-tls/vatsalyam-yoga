@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { scrollToSection } from "@/lib/scroll";
 
 const navLinks = [
   { label: "About", href: "/#about" },
@@ -148,8 +149,8 @@ export function Header() {
             <nav className="flex flex-col px-5 sm:px-8 py-6 gap-1" aria-label="Mobile navigation">
               {navLinks.map((link, index) => (
                 <motion.a
-                  key={link.href}
-                  href={link.href}
+                  key={link.id}
+                  href={`#${link.id}`}
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.05, duration: 0.3 }}

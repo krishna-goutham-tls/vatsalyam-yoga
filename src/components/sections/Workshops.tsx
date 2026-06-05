@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { FadeIn, StaggerContainer, StaggerItem } from "../animations/FadeIn";
+import { scrollToSection } from "@/lib/scroll";
 
 // Most recent workshop first
 const workshops = [

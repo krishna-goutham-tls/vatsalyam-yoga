@@ -23,9 +23,8 @@
   --color-foreground: var(--color-charcoal);
 }
 
-/* Smooth scrolling with header offset */
+/* Scroll padding for header offset — smooth scroll handled by JS */
 html {
-  scroll-behavior: smooth;
   scroll-padding-top: 80px;
 }
 
@@ -60,9 +59,6 @@ body::-webkit-scrollbar-thumb {
 
 /* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
   *,
   *::before,
   *::after {

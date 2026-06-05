@@ -98,7 +98,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${cormorant.variable} ${sora.variable} h-full scroll-smooth antialiased`}
+      className={`${playfair.variable} ${cormorant.variable} ${sora.variable} h-full antialiased`}
     >
       <body className="bg-parchment font-body text-charcoal min-h-full flex flex-col">
         <Header />

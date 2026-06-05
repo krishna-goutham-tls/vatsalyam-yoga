@@ -3,6 +3,19 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { FadeIn } from "../animations/FadeIn";
+import { scrollToSection } from "@/lib/scroll";
+
+function SmoothLink({ id, className, children }: { id: string; className?: string; children: React.ReactNode }) {
+  return (
+    <a
+      href={`#${id}`}
+      onClick={(e) => { e.preventDefault(); scrollToSection(id); }}
+      className={className}
+    >
+      {children}
+    </a>
+  );
+}
 
 export function Hero() {
   return (
@@ -52,18 +65,18 @@ export function Hero() {
 
           <FadeIn delay={0.4}>
             <div className="flex flex-col sm:flex-row gap-3 mb-5">
-              <a
-                href="#classes"
+              <SmoothLink
+                id="classes"
                 className="inline-flex items-center justify-center px-6 py-3 bg-parchment text-deep-forest font-body text-sm font-semibold tracking-wide rounded-sm hover:bg-sage transition-colors duration-300"
               >
                 Explore Classes
-              </a>
-              <a
-                href="#contact"
+              </SmoothLink>
+              <SmoothLink
+                id="contact"
                 className="inline-flex items-center justify-center px-6 py-3 border border-parchment/40 text-parchment font-body text-sm font-medium tracking-wide rounded-sm hover:border-gold hover:text-gold transition-colors duration-300"
               >
                 Contact Us
-              </a>
+              </SmoothLink>
             </div>
           </FadeIn>
 
@@ -107,18 +120,18 @@ export function Hero() {
 
           <FadeIn delay={0.4}>
             <div className="flex flex-row gap-4 mb-8">
-              <a
-                href="#classes"
+              <SmoothLink
+                id="classes"
                 className="inline-flex items-center justify-center px-8 py-3.5 bg-deep-forest text-parchment font-body text-sm font-semibold tracking-wide rounded-sm hover:bg-charcoal transition-colors duration-300"
               >
                 Explore Classes
-              </a>
-              <a
-                href="#contact"
+              </SmoothLink>
+              <SmoothLink
+                id="contact"
                 className="inline-flex items-center justify-center px-8 py-3.5 border border-charcoal/30 text-charcoal font-body text-sm font-medium tracking-wide rounded-sm hover:border-terracotta hover:text-terracotta transition-colors duration-300"
               >
                 Contact Us
-              </a>
+              </SmoothLink>
             </div>
           </FadeIn>
 
