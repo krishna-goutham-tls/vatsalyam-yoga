@@ -2,14 +2,16 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Classes", href: "#classes" },
-  { label: "Stories", href: "#stories" },
-  { label: "Founder", href: "#founder" },
-  { label: "Contact", href: "#contact" },
+  { label: "About", href: "/#about" },
+  { label: "Classes", href: "/#classes" },
+  { label: "Stories", href: "/#stories" },
+  { label: "Founder", href: "/#founder" },
+  { label: "Contact", href: "/#contact" },
+  { label: "Workshops", href: "/workshops/" },
 ];
 
 export function Header() {
@@ -24,11 +26,23 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleNavClick = (href: string) => {
-    setIsOpen(false);
-    const el = document.querySelector(href);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    const isHomePage =
+      window.location.pathname === "/" || window.location.pathname === "";
+    const isAnchorOnHome = href.includes("#") && isHomePage;
+
+    if (isAnchorOnHome) {
+      e.preventDefault();
+      setIsOpen(false);
+      const hash = "#" + href.split("#")[1];
+      setTimeout(() => {
+        const el = document.querySelector(hash);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 350);
+    } else {
+      setIsOpen(false);
     }
   };
 
@@ -43,11 +57,19 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
         <div className="flex items-center justify-between h-16 sm:h-[72px]">
           {/* Logo */}
-          <a
-            href="#hero"
+          <Link
+            href="/"
             onClick={(e) => {
-              e.preventDefault();
-              handleNavClick("#hero");
+              const isHomePage =
+                window.location.pathname === "/" ||
+                window.location.pathname === "";
+              if (isHomePage) {
+                e.preventDefault();
+                setIsOpen(false);
+                setTimeout(() => {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }, 350);
+              }
             }}
             className="relative flex items-center gap-1.5 sm:gap-2"
             aria-label="Vatsalyam Yoga — Home"
@@ -68,7 +90,7 @@ export function Header() {
               className="h-7 sm:h-8 lg:h-9 w-auto object-contain flex-none translate-y-[2px]"
               preload
             />
-          </a>
+          </Link>
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-8" aria-label="Main navigation">
@@ -76,10 +98,7 @@ export function Header() {
               <a
                 key={link.href}
                 href={link.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick(link.href);
-                }}
+                onClick={(e) => handleNavClick(e, link.href)}
                 className="font-body text-[13px] tracking-[0.08em] uppercase text-charcoal/80 hover:text-terracotta transition-colors duration-300 relative group"
               >
                 {link.label}
@@ -134,10 +153,7 @@ export function Header() {
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.05, duration: 0.3 }}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick(link.href);
-                  }}
+                  onClick={(e) => handleNavClick(e, link.href)}
                   className="font-body text-sm tracking-[0.08em] uppercase text-charcoal/80 hover:text-terracotta transition-colors duration-200 py-3 border-b border-gold/5"
                 >
                   {link.label}
