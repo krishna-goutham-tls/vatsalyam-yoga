@@ -1,0 +1,113 @@
+(function () {
+  'use strict';
+
+  var header = document.getElementById('site-header');
+  var navToggle = document.querySelector('.nav-toggle');
+  var mobileNav = document.getElementById('mobile-nav');
+
+  // ---- Sticky header + logo swap ----
+  var logoDark = document.querySelector('.site-logo-dark');
+  var logoLight = document.querySelector('.site-logo-light');
+
+  function onScroll() {
+    var scrolled = window.scrollY > 20;
+    header.classList.toggle('scrolled', scrolled);
+    // Swap logo: white on transparent (dark hero), green on white bg
+    if (logoDark && logoLight) {
+      logoDark.style.display = scrolled ? 'none' : '';
+      logoLight.style.display = scrolled ? '' : 'none';
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // ---- Mobile nav toggle ----
+  if (navToggle && mobileNav) {
+    navToggle.addEventListener('click', function () {
+      var isOpen = mobileNav.classList.toggle('open');
+      navToggle.classList.toggle('open', isOpen);
+      navToggle.setAttribute('aria-expanded', String(isOpen));
+      mobileNav.setAttribute('aria-hidden', String(!isOpen));
+    });
+
+    mobileNav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        mobileNav.classList.remove('open');
+        navToggle.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        mobileNav.setAttribute('aria-hidden', 'true');
+      });
+    });
+  }
+
+  // ---- Smooth scroll with header offset ----
+  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    anchor.addEventListener('click', function (e) {
+      var id = this.getAttribute('href');
+      if (id === '#') return;
+      var target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      var offset = header ? header.offsetHeight : 0;
+      var top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    });
+  });
+
+  // ---- Scroll reveal (IntersectionObserver) ----
+  var reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry, i) {
+        if (entry.isIntersecting) {
+          var el = entry.target;
+          // Stagger siblings in the same parent
+          var siblings = Array.from(el.parentElement.querySelectorAll('.reveal:not(.visible)'));
+          var idx = siblings.indexOf(el);
+          el.style.transitionDelay = idx > 0 ? (idx * 80) + 'ms' : '0ms';
+          el.classList.add('visible');
+          io.unobserve(el);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    reveals.forEach(function (el) { io.observe(el); });
+  } else {
+    reveals.forEach(function (el) { el.classList.add('visible'); });
+  }
+
+  // ---- Active nav link ----
+  var sections = document.querySelectorAll('section[id]');
+  var navLinks = document.querySelectorAll('.primary-nav a, .mobile-nav a');
+
+  function updateActiveNav() {
+    var scrollMid = window.scrollY + window.innerHeight / 2;
+    var active = null;
+    sections.forEach(function (s) {
+      if (s.offsetTop <= scrollMid) active = s.id;
+    });
+    navLinks.forEach(function (a) {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + active);
+    });
+  }
+  window.addEventListener('scroll', updateActiveNav, { passive: true });
+
+  // ---- Enquiry form ----
+  var form = document.getElementById('enquiry-form');
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var btn = form.querySelector('.btn-submit');
+      var original = btn.textContent;
+      btn.textContent = 'Thank you — we will be in touch soon.';
+      btn.disabled = true;
+      // TODO: wire to Make.com webhook / Netlify Forms
+      setTimeout(function () {
+        btn.textContent = original;
+        btn.disabled = false;
+        form.reset();
+      }, 4000);
+    });
+  }
+
+})();
