@@ -428,7 +428,7 @@ p:last-child { margin-bottom: 0; }
 .hero-stats {
   flex: 0 0 auto;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: var(--s2) var(--s3);
   background: rgba(0, 0, 0, 0.28);
   border-top: 1px solid rgba(255,255,255,0.07);
@@ -438,10 +438,10 @@ p:last-child { margin-bottom: 0; }
   display: flex;
   flex-direction: column;
   gap: 2px;
+  grid-column: span 2;
 }
-.stat-item:nth-child(5):nth-child(odd):last-child {
-  grid-column: 1 / -1;
-  align-items: center;
+.stat-item:nth-child(4) {
+  grid-column: 2 / span 2;
 }
 .stat-item strong {
   font-family: var(--serif);
@@ -1036,9 +1036,9 @@ p:last-child { margin-bottom: 0; }
   .hero-content h1 { margin-bottom: var(--s3); }
   .hero-actions { margin-top: var(--s3); }
   .hero-stats { grid-template-columns: repeat(5, 1fr); gap: 0; }
-  .stat-item { padding: 0 var(--s2); border-right: 1px solid rgba(255,255,255,0.08); }
+  .stat-item { padding: 0 var(--s2); border-right: 1px solid rgba(255,255,255,0.08); grid-column: auto; }
   .stat-item:last-child { border-right: none; }
-  .stat-item:nth-child(5):nth-child(odd):last-child { grid-column: auto; align-items: start; }
+  .stat-item:nth-child(4), .stat-item:nth-child(5) { grid-column: auto; }
   .stat-item strong { font-size: 1.0625rem; }
 
   /* Vatsalyam */
