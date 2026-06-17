@@ -38,6 +38,28 @@
         mobileNav.setAttribute('aria-hidden', 'true');
       });
     });
+
+    // Close on outside tap
+    document.addEventListener('click', function (e) {
+      if (!mobileNav.classList.contains('open')) return;
+      var target = e.target;
+      if (!mobileNav.contains(target) && !navToggle.contains(target)) {
+        mobileNav.classList.remove('open');
+        navToggle.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        mobileNav.setAttribute('aria-hidden', 'true');
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && mobileNav.classList.contains('open')) {
+        mobileNav.classList.remove('open');
+        navToggle.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        mobileNav.setAttribute('aria-hidden', 'true');
+      }
+    });
   }
 
   // ---- Smooth scroll with header offset ----
