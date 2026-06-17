@@ -1,6 +1,8 @@
 (function () {
   'use strict';
 
+  var LEAD_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxMLK1_cWatPH2IOvAIs2HJb8Wm4wwuLhLaRJtgF-k01vFHFC1TjSSpMLNMtkp9E2tr/exec';
+
   var header = document.getElementById('site-header');
   var navToggle = document.querySelector('.nav-toggle');
   var mobileNav = document.getElementById('mobile-nav');
@@ -121,14 +123,46 @@
       e.preventDefault();
       var btn = form.querySelector('.btn-submit');
       var original = btn.textContent;
-      btn.textContent = 'Thank you — we will be in touch soon.';
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      btn.textContent = 'Submitting...';
       btn.disabled = true;
-      // TODO: wire to Make.com webhook / Netlify Forms
-      setTimeout(function () {
-        btn.textContent = original;
-        btn.disabled = false;
-        form.reset();
-      }, 4000);
+
+      var formData = new FormData(form);
+      var payload = {
+        name: String(formData.get('name') || '').trim(),
+        email: String(formData.get('email') || '').trim(),
+        phone: String(formData.get('phone') || '').trim(),
+        interest: String(formData.get('interest') || '').trim(),
+        message: String(formData.get('message') || '').trim(),
+        website: String(formData.get('website') || '').trim(),
+        'page-url': window.location.href,
+        source: 'vatsalyam-yoga-website'
+      };
+
+      fetch(LEAD_WEBHOOK_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      })
+        .then(function () {
+          btn.textContent = 'Thank you - we will be in touch soon.';
+          form.reset();
+        })
+        .catch(function () {
+          btn.textContent = 'Something went wrong. Please try again.';
+        })
+        .finally(function () {
+          setTimeout(function () {
+            btn.textContent = original;
+            btn.disabled = false;
+          }, 4000);
+        });
     });
   }
 

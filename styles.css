@@ -917,6 +917,14 @@ p:last-child { margin-bottom: 0; }
   height: 3px;
   background: linear-gradient(90deg, var(--forest) 0%, var(--gold) 100%);
 }
+.honeypot-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
 .contact-form h3 {
   font-size: 1.375rem;
   margin-bottom: var(--s4);
