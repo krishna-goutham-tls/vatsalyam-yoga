@@ -457,6 +457,9 @@ p:last-child { margin-bottom: 0; }
   color: var(--gold);
   line-height: 1.2;
 }
+.stat-tagline strong {
+  font-size: 0.8125rem; /* keep "Guiding students" on one line in narrow mobile columns */
+}
 .stat-item span {
   font-size: 0.6875rem;
   color: rgba(255,255,255,0.5);
