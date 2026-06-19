@@ -114,6 +114,25 @@
   }
   window.addEventListener('scroll', updateActiveNav, { passive: true });
 
+  // ---- Dynamic classes counter ----
+  // Base: 1000 classes as of 2026-06-19, incrementing 9 per week
+  var classesEl = document.getElementById('classes-count');
+  if (classesEl) {
+    var BASE_CLASSES = 1000;
+    var BASE_DATE = new Date('2026-06-19').getTime();
+    var CLASSES_PER_WEEK = 9;
+    var MS_PER_WEEK = 7 * 24 * 60 * 60 * 1000;
+    function updateClassesCount() {
+      var elapsed = Date.now() - BASE_DATE;
+      var weeksElapsed = Math.max(0, elapsed / MS_PER_WEEK);
+      var total = BASE_CLASSES + Math.floor(weeksElapsed * CLASSES_PER_WEEK);
+      classesEl.textContent = total + '+';
+    }
+    updateClassesCount();
+    // Refresh once daily (86400000 ms)
+    setInterval(updateClassesCount, 86400000);
+  }
+
   // ---- Enquiry form ----
   var form = document.getElementById('enquiry-form');
   if (form) {
