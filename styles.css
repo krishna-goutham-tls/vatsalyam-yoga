@@ -651,6 +651,30 @@ p:last-child { margin-bottom: 0; }
    WELLNESS SANGHA
    ---------------------------------------------------------- */
 #sangha { background: var(--off-white); }
+#sangha .section-container { padding-top: var(--s7); }
+
+/* Dark static header variant (used on sangha.html) */
+#site-header.header-dark,
+#site-header.header-dark.scrolled {
+  background: var(--ink);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+}
+#site-header.header-dark .site-logo-dark { display: block; }
+#site-header.header-dark .site-logo-light { display: none; }
+#site-header.header-dark .primary-nav a,
+#site-header.header-dark.scrolled .primary-nav a {
+  color: rgba(255,255,255,0.85);
+}
+#site-header.header-dark .primary-nav a:hover,
+#site-header.header-dark.scrolled .primary-nav a:hover,
+#site-header.header-dark .primary-nav a.active,
+#site-header.header-dark.scrolled .primary-nav a.active {
+  color: var(--white);
+  background: rgba(255,255,255,0.12);
+}
+#site-header.header-dark .nav-toggle span { background: var(--white); }
 
 .sangha-content {
   max-width: 760px;
@@ -719,11 +743,22 @@ p:last-child { margin-bottom: 0; }
   margin: 0 auto;
   max-width: 620px;
 }
+.sangha-cta {
+  margin-top: var(--s4);
+}
+
+/* Active state for external page links */
+.primary-nav a.active,
+#site-header.scrolled .primary-nav a.active {
+  color: var(--forest);
+  background: var(--forest-pale);
+}
+.mobile-nav a.active { color: var(--forest); }
 
 /* ----------------------------------------------------------
    STORIES FROM OUR STUDENTS
    ---------------------------------------------------------- */
-#stories { background: var(--linen); }
+#stories { background: var(--off-white); }
 
 /* Quote cards — editorial pull-quote style */
 .quotes-row {
@@ -811,7 +846,7 @@ p:last-child { margin-bottom: 0; }
 /* ----------------------------------------------------------
    MEET THE FOUNDER
    ---------------------------------------------------------- */
-#founder { background: var(--off-white); }
+#founder { background: var(--linen); }
 
 .founder-layout {
   display: grid;

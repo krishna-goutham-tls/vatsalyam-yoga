@@ -6,6 +6,7 @@
   var header = document.getElementById('site-header');
   var navToggle = document.querySelector('.nav-toggle');
   var mobileNav = document.getElementById('mobile-nav');
+  var isDarkHeader = header && header.classList.contains('header-dark');
 
   // ---- Sticky header + logo swap ----
   var logoDark = document.querySelector('.site-logo-dark');
@@ -13,6 +14,11 @@
 
   function onScroll() {
     var scrolled = window.scrollY > 20;
+    // Dark static header keeps ink background; skip scroll swap
+    if (isDarkHeader) {
+      header.classList.remove('scrolled');
+      return;
+    }
     header.classList.toggle('scrolled', scrolled);
     // Swap logo: white on transparent (dark hero), green on white bg
     if (logoDark && logoLight) {
