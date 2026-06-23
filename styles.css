@@ -648,9 +648,82 @@ p:last-child { margin-bottom: 0; }
 }
 
 /* ----------------------------------------------------------
+   WELLNESS SANGHA
+   ---------------------------------------------------------- */
+#sangha { background: var(--off-white); }
+
+.sangha-content {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.sangha-content p {
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  line-height: 1.75;
+  color: var(--text-2);
+}
+.sangha-subtitle {
+  margin-top: var(--s4);
+  margin-bottom: var(--s2);
+}
+.sangha-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto var(--s4);
+  max-width: 520px;
+  display: grid;
+  gap: var(--s2);
+  text-align: left;
+}
+.sangha-list li {
+  position: relative;
+  padding-left: var(--s4);
+  color: var(--text-2);
+  line-height: 1.6;
+}
+.sangha-list li::before {
+  content: '\2713';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--forest);
+  font-weight: 700;
+  font-family: var(--sans);
+}
+.sangha-video {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  margin: var(--s2) auto var(--s5);
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--r);
+}
+.sangha-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.sangha-quote {
+  font-family: var(--serif);
+  font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+  font-style: italic;
+  color: var(--forest);
+  line-height: 1.5;
+  border-left: none;
+  padding-left: 0;
+  margin: 0 auto;
+  max-width: 620px;
+}
+
+/* ----------------------------------------------------------
    STORIES FROM OUR STUDENTS
    ---------------------------------------------------------- */
-#stories { background: var(--off-white); }
+#stories { background: var(--linen); }
 
 /* Quote cards — editorial pull-quote style */
 .quotes-row {
@@ -738,7 +811,7 @@ p:last-child { margin-bottom: 0; }
 /* ----------------------------------------------------------
    MEET THE FOUNDER
    ---------------------------------------------------------- */
-#founder { background: var(--linen); }
+#founder { background: var(--off-white); }
 
 .founder-layout {
   display: grid;
@@ -1085,6 +1158,7 @@ p:last-child { margin-bottom: 0; }
   }
   .differentiators {
     grid-template-columns: repeat(2, 1fr);
+    gap: var(--s2);
   }
   .differentiators li {
     border-right: 1px solid var(--rule);
@@ -1201,13 +1275,18 @@ p:last-child { margin-bottom: 0; }
   /* Vatsalyam differentiators: 4 columns */
   .differentiators {
     grid-template-columns: repeat(4, 1fr);
+    gap: var(--s2);
   }
   .differentiators li {
     border-bottom: none;
     border-right: 1px solid var(--rule);
     padding-right: var(--s4);
   }
-  .differentiators li:last-child { border-right: none; }
+  .differentiators li:nth-child(2n) {
+    border-right: 1px solid var(--rule);
+    padding-right: var(--s4);
+  }
+  .differentiators li:last-child { border-right: none; padding-right: 0; }
   .differentiators li:nth-last-child(-n+2) { border-bottom: none; }
 
   /* Mosaic: 3-col */
