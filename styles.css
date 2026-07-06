@@ -952,6 +952,43 @@ p:last-child { margin-bottom: 0; }
   border-radius: var(--r);
   padding: var(--s4);
   transition: box-shadow var(--dur) var(--ease), border-color var(--dur) var(--ease);
+  overflow: hidden;
+}
+.ws-media {
+  aspect-ratio: 2 / 3;
+  width: 240px;
+  max-width: 100%;
+  margin: 0 auto var(--s3);
+  overflow: hidden;
+  cursor: zoom-in;
+  border-radius: var(--r);
+}
+.ws-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Lightbox */
+.ws-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: var(--s3);
+  cursor: zoom-out;
+}
+.ws-lightbox.open { display: flex; }
+.ws-lightbox img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: var(--r);
 }
 .workshop-card:hover {
   box-shadow: 0 8px 28px rgba(12,35,24,0.07);
@@ -1226,7 +1263,7 @@ p:last-child { margin-bottom: 0; }
   .grounds-inner { grid-template-columns: 1fr 1fr; }
 
   /* Workshops */
-  .workshops-grid { grid-template-columns: repeat(2, 1fr); }
+  .workshops-grid { grid-template-columns: repeat(2, 1fr); align-items: start; }
 
   /* Contact */
   .contact-layout { grid-template-columns: 1fr 1.1fr; }
