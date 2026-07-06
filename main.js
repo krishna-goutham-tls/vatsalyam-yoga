@@ -191,4 +191,26 @@
     });
   }
 
+  // ---- Workshop image lightbox ----
+  var lightbox = document.getElementById('ws-lightbox');
+  var lightboxImg = document.getElementById('ws-lightbox-img');
+  if (lightbox && lightboxImg) {
+    document.querySelectorAll('.ws-media img').forEach(function (img) {
+      img.addEventListener('click', function () {
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightbox.classList.add('open');
+        lightbox.setAttribute('aria-hidden', 'false');
+      });
+    });
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+    }
+    lightbox.addEventListener('click', closeLightbox);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+    });
+  }
+
 })();
